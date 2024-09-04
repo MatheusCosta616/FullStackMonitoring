@@ -19,6 +19,7 @@ function DevicePage() {
     fetchLogs();
   }, [id]);
 
+  //endpoint GET/devices/{deviceId}, para puxar um device especifico
   const fetchDevice = async () => {
     try {
       const response = await fetch(`http://localhost:8080/devices/${id}`, {
@@ -39,6 +40,7 @@ function DevicePage() {
     }
   };
 
+  //endpoint GET/alerts/device/{deviceId}, para puxar os alertas de um device especifico
   const fetchAlerts = async () => {
     try {
       const response = await fetch(`http://localhost:8080/alerts/device/${id}`, {
@@ -58,6 +60,7 @@ function DevicePage() {
     }
   };
 
+  //endpoint GET/logs/device/{deviceId}, para puxar os logs de um device especifico
   const fetchLogs = async () => {
     try {
       const response = await fetch(`http://localhost:8080/devices/${id}/log`, {
@@ -77,6 +80,7 @@ function DevicePage() {
     }
   };
 
+  //endpoint PUT/devices/{deviceId}, para atualizar um device especifico
   const handleUpdate = async () => {
     try {
       const response = await fetch(`http://localhost:8080/devices/${id}`, {
@@ -96,6 +100,7 @@ function DevicePage() {
     }
   };
 
+  //endpoint DELETE/devices/{deviceId}, para deletar um device especifico
   const handleDelete = async () => {
     try {
       const response = await fetch(`http://localhost:8080/devices/${id}`, {
@@ -110,6 +115,7 @@ function DevicePage() {
     }
   };
 
+  //endpoint POST/alerts, para adicionar um alerta
   const handleAddAlert = async (e) => {
     e.preventDefault();
     try {
@@ -137,6 +143,7 @@ function DevicePage() {
     }
   };
 
+  //endpoint POST/logs/device/{deviceId}, para adicionar um log
   const handleAddLog = async (e) => {
     e.preventDefault();
     try {
@@ -157,11 +164,14 @@ function DevicePage() {
     }
   };
 
+  //se o dispositivo nao existir, retorna uma mensagem de carregamento
   if (!device) return <div>Carregando...</div>;
 
   return (
     <div className="device-page">
+      {/* informaçes do dispositivo */}
       <div className="device-info">
+        {/* se o dispositivo estiver em modo de edição, exibe o formulario de edição */}
         {editMode ? (
           <div className="edit-form">
             <input
@@ -179,12 +189,15 @@ function DevicePage() {
               onChange={(e) => setEditedDevice({...editedDevice, location: e.target.value})}
               placeholder="Localização"
             />
+            {/* botoes de salvar e cancelar */}
             <div className="button-group">
               <button onClick={handleUpdate} className="save-btn">Salvar</button>
               <button onClick={() => setEditMode(false)} className="cancel-btn">Cancelar</button>
             </div>
           </div>
+          //se o dispositivo nao estiver em modo de edição, exibe as informaçes do dispositivo
         ) : (
+          //informaçes do dispositivo
           <div className="device-details">
             <h1>{device.name}</h1>
             <p className={`status ${device.status.toLowerCase()}`}>Status: {device.status}</p>
@@ -200,6 +213,7 @@ function DevicePage() {
         )}
       </div>
 
+      {/* alertas do dispositivo */}
       <div className="alerts-section">
         <h2>Alertas</h2>
         {alerts.length > 0 ? (
@@ -232,6 +246,8 @@ function DevicePage() {
         </form>
       </div>
 
+
+      {/* logs do dispositivo */}
       <div className="logs-section">
         <h2>Logs</h2>
         <pre>{logs}</pre>
