@@ -17,7 +17,7 @@ import java.util.UUID;
 
 /**
  * Controlador responsável por gerenciar as operações relacionadas aos alertas.
- * Fornece endpoints para criar alertas e recuperar alertas associados a dispositivos específicos.
+ * Fornece endpoints para criar alertas e recuperar alertas associados a dispositivos específicos..
  */
 @RestController
 @RequestMapping("/alerts")
