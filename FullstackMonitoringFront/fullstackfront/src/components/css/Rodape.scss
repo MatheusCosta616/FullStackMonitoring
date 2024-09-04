@@ -1,0 +1,17 @@
+@import '../../styles/variables';
+
+.rodape {
+  background-color: $secondary-color;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  height: $footer-height;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+}

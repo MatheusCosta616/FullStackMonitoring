@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,OAAO,CAAC;EACN,gBAAgB,ECFA,OAAO;EDGvB,KAAK,EAAE,KAAK;EACZ,UAAU,EAAE,MAAM;EAClB,OAAO,EAAE,IAAI;EACb,MAAM,ECAQ,IAAI;EDClB,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,MAAM;CAMxB;;AAdD,AAUE,OAVK,CAUL,CAAC,CAAC;EACA,MAAM,EAAE,CAAC;EACT,SAAS,EAAE,MAAM;CAClB",
+    "sources": [
+        "Rodape.scss",
+        "../../styles/_variables.scss"
+    ],
+    "names": [],
+    "file": "Rodape.css"
+}

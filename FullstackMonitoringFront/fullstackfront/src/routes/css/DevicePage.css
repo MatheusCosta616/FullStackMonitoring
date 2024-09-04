@@ -1,0 +1,47 @@
+.device-page {
+  padding: 2rem;
+}
+
+.device-page h1 {
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.device-page .status {
+  font-weight: bold;
+}
+
+.device-page .status.online {
+  color: green;
+}
+
+.device-page .status.offline {
+  color: red;
+}
+
+.device-page .logs {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 1rem;
+  margin-top: 1rem;
+  list-style-type: none;
+}
+
+.device-page .logs li {
+  margin-bottom: 0.5rem;
+}
+
+.device-page .delete-btn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.device-page .delete-btn:hover {
+  background-color: #c82333;
+}
+/*# sourceMappingURL=DevicePage.css.map */

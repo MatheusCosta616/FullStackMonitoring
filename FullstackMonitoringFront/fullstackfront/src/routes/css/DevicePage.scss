@@ -1,0 +1,46 @@
+@import '../../styles/variables';
+
+.device-page {
+  padding: 2rem;
+
+  h1 {
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  .status {
+    font-weight: bold;
+    &.online {
+      color: green;
+    }
+    &.offline {
+      color: red;
+    }
+  }
+
+  .logs {
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    padding: 1rem;
+    margin-top: 1rem;
+    list-style-type: none;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: #c82333;
+    }
+  }
+}
