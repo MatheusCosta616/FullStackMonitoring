@@ -1,0 +1,22 @@
+.rodape {
+  background-color: #6c757d;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.rodape p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+/*# sourceMappingURL=Rodape.css.map */

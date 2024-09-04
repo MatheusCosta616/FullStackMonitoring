@@ -1,0 +1,16 @@
+@import '../../styles/variables';
+
+.home {
+  text-align: center;
+  padding: 2rem;
+
+  h1 {
+    color: $primary-color;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: $text-color;
+    font-size: 1.1rem;
+  }
+}

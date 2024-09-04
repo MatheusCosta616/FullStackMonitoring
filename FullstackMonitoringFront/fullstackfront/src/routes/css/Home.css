@@ -1,0 +1,15 @@
+.home {
+  text-align: center;
+  padding: 2rem;
+}
+
+.home h1 {
+  color: #007bff;
+  margin-bottom: 1rem;
+}
+
+.home p {
+  color: #333;
+  font-size: 1.1rem;
+}
+/*# sourceMappingURL=Home.css.map */
