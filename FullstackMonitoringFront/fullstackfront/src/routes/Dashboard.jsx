@@ -11,6 +11,7 @@ function Dashboard() {
     fetchDevices();
   }, []);
 
+  //endpoint GET/devices, para puxar todos dispositivos
   const fetchDevices = async () => {
     try {
       console.log('Buscando dispositivos...');
@@ -26,6 +27,7 @@ function Dashboard() {
     }
   };
 
+  //endpoint POST/devices, para cadastrar dispositivos
   const handleAddDevice = async (newDevice) => {
     try {
       const response = await fetch('http://localhost:8080/devices', {
