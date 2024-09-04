@@ -30,12 +30,17 @@ function DeviceCard({ device, onUpdate }) {
     }
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return isNaN(date.getTime()) ? 'Data inválida' : date.toLocaleString();
+  };
+
   return (
     <div className="device-card">
       <Link to={`/device/${device.id}`}>
         <h2>{device.name}</h2>
         <p className={`status ${device.status.toLowerCase()}`}>Status: {device.status}</p>
-        <p>Último ping: {new Date(device.lastPing).toLocaleString()}</p>
+        <p>Último ping: {formatDate(device.lastPing)}</p>
       </Link>
       <button onClick={handleDelete} className="delete-btn">Excluir</button>
     </div>
