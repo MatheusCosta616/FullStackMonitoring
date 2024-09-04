@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import '../components/css/DeviceCard.scss';
 
 function DeviceCard({ device, onUpdate }) {
+
+  //endpoint DELETE/devices/{deviceId}, para deletar um device especifico
   const handleDelete = async () => {
     if (window.confirm(`Tem certeza que deseja excluir o dispositivo "${device.name}"?`)) {
       try {
