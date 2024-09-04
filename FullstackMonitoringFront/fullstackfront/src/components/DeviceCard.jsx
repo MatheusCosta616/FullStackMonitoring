@@ -4,16 +4,29 @@ import '../components/css/DeviceCard.scss';
 
 function DeviceCard({ device, onUpdate }) {
   const handleDelete = async () => {
-    try {
-      const response = await fetch(`http://localhost:8080/devices/${device.id}`, {
-        method: 'DELETE',
-      });
-      if (!response.ok) {
-        throw new Error('Falha ao excluir dispositivo');
+    if (window.confirm(`Tem certeza que deseja excluir o dispositivo "${device.name}"?`)) {
+      try {
+        console.log(`Tentando excluir dispositivo com ID: ${device.id}`);
+        const response = await fetch(`http://localhost:8080/devices/${device.id}`, {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+        });
+        
+        const responseData = await response.text();
+        console.log('Resposta do servidor:', responseData);
+
+        if (!response.ok) {
+          throw new Error(`Falha ao excluir dispositivo: ${responseData}`);
+        }
+        
+        console.log('Dispositivo excluído com sucesso');
+        onUpdate();
+      } catch (error) {
+        console.error('Erro ao excluir dispositivo:', error);
+        alert(`Erro ao excluir dispositivo: ${error.message}`);
       }
-      onUpdate(); // Atualiza a lista de dispositivos após a exclusão
-    } catch (error) {
-      console.error('Erro ao excluir dispositivo:', error);
     }
   };
 
