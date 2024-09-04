@@ -9,8 +9,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aqui você normalmente faria uma chamada à API para autenticar
-    // Para este exemplo, vamos apenas verificar se o username não está vazio
+
     if (username.trim() !== '') {
       sessionStorage.setItem('isLoggedIn', 'true');
       sessionStorage.setItem('username', username);
