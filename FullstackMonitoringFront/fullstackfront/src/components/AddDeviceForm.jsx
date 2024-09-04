@@ -8,7 +8,13 @@ function AddDeviceForm({ onAddDevice }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddDevice({ name, status, location });
+    const newDevice = {
+      name,
+      status,
+      location,
+      lastPing: new Date().toISOString() // Adiciona o timestamp atual
+    };
+    onAddDevice(newDevice);
     setName('');
     setStatus('online');
     setLocation('');

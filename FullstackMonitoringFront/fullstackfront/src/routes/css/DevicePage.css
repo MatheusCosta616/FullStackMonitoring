@@ -1,10 +1,131 @@
 .device-page {
   padding: 2rem;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-.device-page h1 {
+.device-page h1, .device-page h2 {
   color: #007bff;
-  margin-bottom: 1rem;
+}
+
+.device-page .device-info, .device-page .alerts-section, .device-page .logs-section {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.device-page .device-info {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+          box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.device-page .device-info .device-details, .device-page .device-info .edit-form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 1rem;
+}
+
+.device-page .device-info .device-details {
+  position: relative;
+  top: -10%;
+}
+
+.device-page .device-info h1 {
+  margin: 0;
+  color: #007bff;
+}
+
+.device-page .device-info input {
+  padding: 0.5rem;
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.device-page .device-info .status {
+  font-weight: bold;
+}
+
+.device-page .device-info .status.online {
+  color: green;
+}
+
+.device-page .device-info .status.offline {
+  color: red;
+}
+
+.device-page .device-info .button-group {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.device-page .device-info button {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  -webkit-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease;
+  height: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.device-page .device-info button.edit-btn, .device-page .device-info button.save-btn, .device-page .device-info button.delete-btn, .device-page .device-info button.cancel-btn {
+  font-size: 1rem;
+}
+
+.device-page .device-info button.edit-btn, .device-page .device-info button.save-btn {
+  background-color: #007bff;
+  color: white;
+}
+
+.device-page .device-info button.edit-btn:hover, .device-page .device-info button.save-btn:hover {
+  background-color: #0062cc;
+}
+
+.device-page .device-info button.delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+.device-page .device-info button.delete-btn:hover {
+  background-color: #bd2130;
+}
+
+.device-page .device-info button.cancel-btn {
+  background-color: #6c757d;
+  color: white;
+}
+
+.device-page .device-info button.cancel-btn:hover {
+  background-color: #545b62;
 }
 
 .device-page .status {
@@ -19,16 +140,57 @@
   color: red;
 }
 
-.device-page .logs {
-  background-color: #f0f0f0;
-  border-radius: 5px;
-  padding: 1rem;
-  margin-top: 1rem;
+.device-page .alerts-list {
   list-style-type: none;
+  padding: 0;
 }
 
-.device-page .logs li {
+.device-page .alerts-list .alert-item {
+  background-color: #fff3cd;
+  border: 1px solid #ffeeba;
+  color: #856404;
+  padding: 0.75rem;
   margin-bottom: 0.5rem;
+  border-radius: 4px;
+}
+
+.device-page form {
+  margin-top: 1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 0.5rem;
+}
+
+.device-page form input {
+  padding: 0.5rem;
+  border: 1px solid #6c757d;
+  border-radius: 4px;
+}
+
+.device-page form button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.device-page form button:hover {
+  background-color: #0062cc;
+}
+
+.device-page pre {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 4px;
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 
 .device-page .delete-btn {
@@ -36,12 +198,12 @@
   color: white;
   border: none;
   padding: 0.5rem 1rem;
-  border-radius: 5px;
+  border-radius: 4px;
   cursor: pointer;
   margin-top: 1rem;
 }
 
 .device-page .delete-btn:hover {
-  background-color: #c82333;
+  background-color: #bd2130;
 }
 /*# sourceMappingURL=DevicePage.css.map */
