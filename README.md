@@ -84,6 +84,53 @@ O backend estará disponível em `http://localhost:8080`.
 
 O frontend estará disponível em `http://localhost:5173`.
 
+## Configuração do Banco de Dados
+
+1. Instale o PostgreSQL em sua máquina, se ainda não estiver instalado.
+
+2. Crie um novo banco de dados chamado `fullstackDB`:
+   ```
+   CREATE DATABASE fullstackDB;
+   ```
+
+3. Atualize o arquivo `src/main/resources/application.properties` com suas credenciais do PostgreSQL:
+   ```
+   spring.datasource.url=jdbc:postgresql://localhost:5432/fullstackDB
+   spring.datasource.username=seu_usuario
+   spring.datasource.password=sua_senha
+   ```
+
+4. O Hibernate criará automaticamente as tabelas necessárias quando você iniciar a aplicação pela primeira vez, graças à configuração `spring.jpa.hibernate.ddl-auto=update`.
+
+5. Se desejar, você pode criar manualmente as tabelas principais executando os seguintes comandos SQL:
+
+   ```sql
+   CREATE TABLE devices (
+       id SERIAL PRIMARY KEY,
+       name VARCHAR(255) NOT NULL,
+       type VARCHAR(50),
+       status VARCHAR(50),
+       last_update TIMESTAMP
+   );
+
+   CREATE TABLE alerts (
+       id SERIAL PRIMARY KEY,
+       device_id INTEGER REFERENCES devices(id),
+       message TEXT,
+       severity VARCHAR(50),
+       timestamp TIMESTAMP
+   );
+
+   CREATE TABLE logs (
+       id SERIAL PRIMARY KEY,
+       device_id INTEGER REFERENCES devices(id),
+       message TEXT,
+       timestamp TIMESTAMP
+   );
+   ```
+
+Nota: Certifique-se de que o PostgreSQL está em execução antes de iniciar a aplicação Spring Boot.
+
 ## Estrutura do Projeto
 
 ### Backend (FullstackMonitoringAPI)
