@@ -3,14 +3,14 @@ import './css/AddDeviceForm.scss';
 
 function AddDeviceForm({ onAddDevice }) {
   const [name, setName] = useState('');
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState('online');
   const [location, setLocation] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     onAddDevice({ name, status, location });
     setName('');
-    setStatus('');
+    setStatus('online');
     setLocation('');
   };
 
@@ -23,13 +23,18 @@ function AddDeviceForm({ onAddDevice }) {
         placeholder="Nome do dispositivo"
         required
       />
-      <input
-        type="text"
-        value={status}
-        onChange={(e) => setStatus(e.target.value)}
-        placeholder="Status"
-        required
-      />
+      <div className="select-wrapper">
+        <label htmlFor="status">Status:</label>
+        <select
+          id="status"
+          value={status}
+          onChange={(e) => setStatus(e.target.value)}
+          required
+        >
+          <option value="online">Online</option>
+          <option value="offline">Offline</option>
+        </select>
+      </div>
       <input
         type="text"
         value={location}

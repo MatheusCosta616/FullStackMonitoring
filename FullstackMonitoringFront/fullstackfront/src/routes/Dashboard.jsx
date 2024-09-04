@@ -13,11 +13,13 @@ function Dashboard() {
 
   const fetchDevices = async () => {
     try {
+      console.log('Buscando dispositivos...');
       const response = await fetch('http://localhost:8080/devices');
       if (!response.ok) {
         throw new Error('Falha ao buscar dispositivos');
       }
       const data = await response.json();
+      console.log('Dispositivos recebidos:', data);
       setDevices(data);
     } catch (error) {
       console.error('Erro ao buscar dispositivos:', error);
@@ -36,7 +38,7 @@ function Dashboard() {
       if (!response.ok) {
         throw new Error('Falha ao adicionar dispositivo');
       }
-      fetchDevices(); // Atualiza a lista de dispositivos
+      fetchDevices();
       setShowAddForm(false);
     } catch (error) {
       console.error('Erro ao adicionar dispositivo:', error);
@@ -49,7 +51,11 @@ function Dashboard() {
       <button onClick={() => setShowAddForm(!showAddForm)}>
         {showAddForm ? 'Cancelar' : 'Adicionar Dispositivo'}
       </button>
-      {showAddForm && <AddDeviceForm onAddDevice={handleAddDevice} />}
+      {showAddForm && (
+        <div className="add-device-form-container">
+          <AddDeviceForm onAddDevice={handleAddDevice} />
+        </div>
+      )}
       <div className="device-grid">
         {devices.map(device => (
           <DeviceCard key={device.id} device={device} onUpdate={fetchDevices} />
