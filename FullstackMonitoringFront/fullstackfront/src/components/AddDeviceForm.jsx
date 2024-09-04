@@ -12,7 +12,7 @@ function AddDeviceForm({ onAddDevice }) {
       name,
       status,
       location,
-      lastPing: new Date().toISOString()
+      lastPing: new Date().toISOString() // Adiciona o timestamp atual
     };
     onAddDevice(newDevice);
     setName('');
