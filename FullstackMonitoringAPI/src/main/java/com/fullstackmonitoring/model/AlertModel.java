@@ -13,17 +13,12 @@ import java.util.UUID;
  * Representa um alerta no sistema de monitoramento.
  * Cada alerta está associado a um dispositivo específico.
  */
-@Entity
 @Table(name = "TD_ALERT")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class AlertModel {
-    @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
-    private UUID id;
     @ManyToOne
     @JoinColumn(name = "device_id", nullable = false)
     private DeviceModel device;

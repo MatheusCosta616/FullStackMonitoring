@@ -20,7 +20,7 @@ import java.util.UUID;
  * Fornece endpoints para criar, recuperar, atualizar e gerenciar dispositivos no sistema.
  */
 @RestController
-@CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5175")
 public class DeviceController {
 
     @Autowired
@@ -154,5 +154,20 @@ public class DeviceController {
         
         String log = deviceOptional.get().getLogs();
         return ResponseEntity.status(HttpStatus.OK).body(log);
+    }
+
+    @PostMapping("/devices/{deviceId}/alert")
+    public ResponseEntity<Object> addAlert(@PathVariable(value = "deviceId") UUID deviceId, @RequestBody String alertMessage) {
+        Optional<DeviceModel> deviceOptional = deviceRepository.findById(deviceId);
+        if (deviceOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dispositivo não encontrado");
+        }
+
+        DeviceModel device = deviceOptional.get();
+        device.setLogs(alertMessage);
+        device.setLastPing(LocalDateTime.now().toString());
+
+        DeviceModel updatedDevice = deviceRepository.save(device);
+        return ResponseEntity.status(HttpStatus.CREATED).body(updatedDevice);
     }
 }

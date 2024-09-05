@@ -35,8 +35,8 @@ public class AlertController {
      * @param alertDTO DTO contendo os dados do novo alerta.
      * @return ResponseEntity com o alerta criado ou uma mensagem de erro se o dispositivo associado não for encontrado.
      */
-    @PostMapping
-    public ResponseEntity<AlertModel> configureAlert(@RequestBody @Valid AlertDTO alertDTO) {
+    @PostMapping("/device/{deviceId}")
+    public ResponseEntity<AlertModel> configureAlert(@RequestBody @Valid AlertDTO alertDTO, @PathVariable UUID deviceId) {
         Optional<DeviceModel> deviceOpt = deviceRepository.findById(alertDTO.deviceId());
         if (deviceOpt.isEmpty()) {
             return ResponseEntity.notFound().build();

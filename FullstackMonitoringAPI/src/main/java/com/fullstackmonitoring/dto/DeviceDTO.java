@@ -17,5 +17,6 @@ public record DeviceDTO(
     @NotBlank String status,
     String lastPing,
     String location,
-    String logs
+    String logs,
+    String alert
 ) {}
