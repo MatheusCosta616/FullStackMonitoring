@@ -1,6 +1,7 @@
 package com.fullstackmonitoring.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 /**
  * DTO (Data Transfer Object) para transferência de dados de dispositivo.
@@ -14,7 +15,7 @@ import jakarta.validation.constraints.NotBlank;
  */
 public record DeviceDTO(
     @NotBlank String name,
-    @NotBlank String status,
+    @NotBlank @Pattern(regexp = "^(ativo|inativo|falha)$", message = "Status deve ser 'ativo', 'inativo' ou 'falha'") String status,
     String lastPing,
     String location,
     String logs,

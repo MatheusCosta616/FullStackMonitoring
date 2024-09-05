@@ -12,6 +12,7 @@ function DevicePage() {
   const [newAlert, setNewAlert] = useState({ condition: '', message: '' });
   const [logs, setLogs] = useState('');
   const [newLog, setNewLog] = useState('');
+  const statusOptions = ["ativo", "inativo", "falha"];
 
   useEffect(() => {
     fetchDevice();
@@ -182,11 +183,16 @@ function DevicePage() {
               onChange={(e) => setEditedDevice({...editedDevice, name: e.target.value})}
               placeholder="Nome do dispositivo"
             />
-            <input
+            <select
               value={editedDevice.status}
               onChange={(e) => setEditedDevice({...editedDevice, status: e.target.value})}
-              placeholder="Status"
-            />
+            >
+              {statusOptions.map((option) => (
+                <option key={option} value={option}>
+                  {option.charAt(0).toUpperCase() + option.slice(1)}
+                </option>
+              ))}
+            </select>
             <input
               value={editedDevice.location}
               onChange={(e) => setEditedDevice({...editedDevice, location: e.target.value})}

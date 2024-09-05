@@ -14,7 +14,7 @@ function Cabecalho({ onLogout, isLoggedIn }) {
         <ul>
           {isLoggedIn ? (
             <>
-              <li><NavLink to="/home">Início</NavLink></li>
+              <li><NavLink to="/">Início</NavLink></li>
               <li><NavLink to="/dashboard">Dashboard</NavLink></li>
               <li><span className="username">Olá, {username}</span></li>
               <li><button onClick={onLogout} className="logout-btn">Sair</button></li>

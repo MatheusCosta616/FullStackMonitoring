@@ -34,16 +34,21 @@ function Dashboard() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify(newDevice),
+        body: JSON.stringify(newDevice)
       });
+
       if (!response.ok) {
-        throw new Error('Falha ao adicionar dispositivo');
+        const errorData = await response.text();
+        throw new Error(`Falha ao adicionar dispositivo: ${errorData}`);
       }
-      fetchDevices();
-      setShowAddForm(false);
+
+      const addedDevice = await response.json();
+      setDevices([...devices, addedDevice]);
     } catch (error) {
       console.error('Erro ao adicionar dispositivo:', error);
+      alert(error.message);
     }
   };
 
