@@ -14,8 +14,8 @@ import jakarta.validation.constraints.Pattern;
  * @param logs Logs associados ao dispositivo.
  */
 public record DeviceDTO(
-    @NotBlank String name,
-    @NotBlank @Pattern(regexp = "^(ativo|inativo|falha)$", message = "Status deve ser 'ativo', 'inativo' ou 'falha'") String status,
+    String name,
+    @Pattern(regexp = "^(ativo|inativo|falha)$", message = "Status deve ser 'ativo', 'inativo' ou 'falha'") String status,
     String lastPing,
     String location,
     String logs,

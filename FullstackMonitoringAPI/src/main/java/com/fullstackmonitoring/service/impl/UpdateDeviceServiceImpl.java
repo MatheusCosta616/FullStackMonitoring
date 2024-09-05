@@ -1,12 +1,12 @@
 package com.fullstackmonitoring.service.impl;
 
 import com.fullstackmonitoring.dto.DeviceDTO;
+import com.fullstackmonitoring.exception.ResourceNotFoundException;
 import com.fullstackmonitoring.model.DeviceModel;
 import com.fullstackmonitoring.repositories.DeviceRepository;
 import com.fullstackmonitoring.service.UpdateDeviceService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,15 +27,36 @@ public class UpdateDeviceServiceImpl implements UpdateDeviceService {
 
         if (deviceOptional.isEmpty()) {
             logger.error("Dispositivo com ID {} não encontrado.", deviceId);
-            throw new RuntimeException("Dispositivo não encontrado");
+            throw new ResourceNotFoundException("Dispositivo não encontrado");
         }
 
         DeviceModel device = deviceOptional.get();
-        BeanUtils.copyProperties(deviceDTO, device);
+        updateDeviceFields(device, deviceDTO);
 
         DeviceModel updatedDevice = deviceRepository.save(device);
         logger.info("Dispositivo com ID {} atualizado com sucesso.", deviceId);
 
         return updatedDevice;
+    }
+
+    private void updateDeviceFields(DeviceModel device, DeviceDTO deviceDTO) {
+        if (deviceDTO.name() != null) {
+            device.setName(deviceDTO.name());
+        }
+        if (deviceDTO.status() != null) {
+            device.setStatus(deviceDTO.status());
+        }
+        if (deviceDTO.lastPing() != null) {
+            device.setLastPing(deviceDTO.lastPing());
+        }
+        if (deviceDTO.location() != null) {
+            device.setLocation(deviceDTO.location());
+        }
+        if (deviceDTO.logs() != null) {
+            device.setLogs(deviceDTO.logs());
+        }
+        if (deviceDTO.alert() != null) {
+            device.setAlert(deviceDTO.alert());
+        }
     }
 }
