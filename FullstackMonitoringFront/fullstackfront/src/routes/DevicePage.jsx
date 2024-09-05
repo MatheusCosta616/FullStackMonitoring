@@ -40,10 +40,10 @@ function DevicePage() {
     }
   };
 
-  //endpoint GET/alerts/device/{deviceId}, para puxar os alertas de um device especifico
+  //endpoint GET/devices/{deviceId}/alert, para puxar os alertas de um device especifico
   const fetchAlerts = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/alerts/device/${id}`, {
+      const response = await fetch(`http://localhost:8080/devices/${id}/alert`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -53,14 +53,16 @@ function DevicePage() {
       if (!response.ok) {
         throw new Error('Falha ao buscar alertas');
       }
-      const data = await response.json();
-      setAlerts(data);
+      const data = await response.text(); // Mudança aqui: usando text() em vez de json()
+      console.log('Alerta recebido:', data); // Log para debug
+      setAlerts(data ? [{ message: data }] : []); // Ajuste aqui: criando um array com o alerta
     } catch (error) {
       console.error('Erro ao buscar alertas:', error);
+      setAlerts([]); // Em caso de erro, definimos alerts como um array vazio
     }
   };
 
-  //endpoint GET/logs/device/{deviceId}, para puxar os logs de um device especifico
+  //endpoint GET/devices/{deviceId}/log, para puxar os logs de um device especifico
   const fetchLogs = async () => {
     try {
       const response = await fetch(`http://localhost:8080/devices/${id}/log`, {
@@ -87,6 +89,7 @@ function DevicePage() {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(editedDevice),
       });
@@ -105,6 +108,9 @@ function DevicePage() {
     try {
       const response = await fetch(`http://localhost:8080/devices/${id}`, {
         method: 'DELETE',
+        headers: {
+          'Access-Control-Allow-Origin': '*'
+        },
       });
       if (!response.ok) {
         throw new Error('Falha ao excluir dispositivo');
@@ -115,21 +121,17 @@ function DevicePage() {
     }
   };
 
-  //endpoint POST/alerts, para adicionar um alerta
+  //endpoint POST/devices/{deviceId}/alert, para adicionar um alerta
   const handleAddAlert = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:8080/alerts', {
+      const response = await fetch(`http://localhost:8080/devices/${id}/alert`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         },
-        body: JSON.stringify({
-          deviceId: id,
-          condition: newAlert.condition,
-          message: newAlert.message,
-        }),
+        body: JSON.stringify(newAlert.message),
       });
       if (!response.ok) {
         throw new Error('Falha ao adicionar alerta');
@@ -143,7 +145,7 @@ function DevicePage() {
     }
   };
 
-  //endpoint POST/logs/device/{deviceId}, para adicionar um log
+  //endpoint POST/devices/{deviceId}/log, para adicionar um log
   const handleAddLog = async (e) => {
     e.preventDefault();
     try {
@@ -151,6 +153,7 @@ function DevicePage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(newLog),
       });
@@ -220,7 +223,7 @@ function DevicePage() {
           <ul className="alerts-list">
             {alerts.map((alert, index) => (
               <li key={index} className="alert-item">
-                <strong>{alert.condition}:</strong> {alert.message}
+                {alert.message}
               </li>
             ))}
           </ul>
@@ -230,14 +233,7 @@ function DevicePage() {
         <form onSubmit={handleAddAlert} className="add-alert-form">
           <input
             type="text"
-            placeholder="Condição"
-            value={newAlert.condition}
-            onChange={(e) => setNewAlert({...newAlert, condition: e.target.value})}
-            required
-          />
-          <input
-            type="text"
-            placeholder="Mensagem"
+            placeholder="Novo alerta"
             value={newAlert.message}
             onChange={(e) => setNewAlert({...newAlert, message: e.target.value})}
             required

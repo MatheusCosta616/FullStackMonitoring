@@ -1,9 +1,6 @@
 package com.fullstackmonitoring.service;
 
-import com.fullstackmonitoring.dto.AlertDTO;
-import com.fullstackmonitoring.model.AlertModel;
 import com.fullstackmonitoring.model.DeviceModel;
-import com.fullstackmonitoring.repositories.AlertRepository;
 import com.fullstackmonitoring.repositories.DeviceRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

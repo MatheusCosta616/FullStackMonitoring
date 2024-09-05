@@ -164,10 +164,21 @@ public class DeviceController {
         }
 
         DeviceModel device = deviceOptional.get();
-        device.setLogs(alertMessage);
+        device.setAlert(alertMessage);
         device.setLastPing(LocalDateTime.now().toString());
 
         DeviceModel updatedDevice = deviceRepository.save(device);
         return ResponseEntity.status(HttpStatus.CREATED).body(updatedDevice);
+    }
+
+    @GetMapping("/devices/{deviceId}/alert")
+    public ResponseEntity<Object> getDeviceAlert(@PathVariable(value = "deviceId") UUID deviceId) {
+        Optional<DeviceModel> deviceOptional = deviceRepository.findById(deviceId);
+        if (deviceOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Dispositivo não encontrado");
+        }
+
+        String alert = deviceOptional.get().getAlert();
+        return ResponseEntity.status(HttpStatus.OK).body(alert);
     }
 }
